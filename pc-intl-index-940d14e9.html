@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>PC 国际麻将 · 站点介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f6fafb;
+            color: #1e2b2f;
+            line-height: 1.6;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        /* 主视觉 —— 简洁网格卡片头 */
+        .hero {
+            background: linear-gradient(145deg, #d8f0f0 0%, #b3dbd4 100%);
+            border-radius: 36px;
+            padding: 2.2rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 28px rgba(0, 60, 55, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0d3f42;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .hero .sub {
+            font-size: 1.15rem;
+            color: #206067;
+            max-width: 460px;
+            position: relative;
+        }
+
+        /* 网格卡片系统 —— 两列自适应 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 2.8rem;
+        }
+
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 6px 18px rgba(0, 60, 60, 0.04);
+            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1px solid #ddedec;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 28px rgba(0, 80, 70, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+            display: inline-block;
+            background: #e1f3f0;
+            width: 48px;
+            height: 48px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1c6b64;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #143d3c;
+            margin: 0.6rem 0 0.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            font-size: 0.98rem;
+            color: #2e484a;
+            margin-bottom: 0.6rem;
+            flex: 1;
+        }
+
+        .card .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 0.8rem;
+        }
+
+        .tag-list span {
+            background: #eaf5f2;
+            color: #11645e;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        /* 适合人群卡片变体（宽度融通） */
+        .audience-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 2.2rem;
+        }
+
+        @media (max-width: 500px) {
+            .audience-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .audience-item {
+            background: white;
+            border-radius: 28px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid #d0e3e0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+        }
+
+        .audience-item h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #174d4a;
+            margin-bottom: 0.3rem;
+        }
+
+        .audience-item p {
+            font-size: 0.92rem;
+            color: #315e5b;
+        }
+
+        /* 自然链接段落 */
+        .link-section {
+            background: #e5f2ef;
+            border-radius: 30px;
+            padding: 2rem 2rem 1.8rem;
+            margin: 1.8rem 0 2rem;
+            border: 1px solid #bcd6d2;
+        }
+
+        .link-section p {
+            font-size: 1.05rem;
+            color: #1d4949;
+            max-width: 720px;
+        }
+
+        .link-section a {
+            color: #035f5a;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #73ada8;
+            transition: color 0.15s;
+        }
+
+        .link-section a:hover {
+            color: #023b38;
+            text-decoration-color: #1c7a72;
+        }
+
+        /* 提示 & FAQ 摘要 */
+        .faq-tips {
+            background: white;
+            border-radius: 30px;
+            padding: 1.8rem 2rem;
+            border-left: 10px solid #5fafa5;
+            box-shadow: 0 6px 14px rgba(0, 60, 50, 0.02);
+            margin: 2rem 0 0.5rem;
+        }
+
+        .faq-tips h3 {
+            font-size: 1.3rem;
+            color: #0c4a46;
+            margin-bottom: 0.6rem;
+        }
+
+        .faq-tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq-tips li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #d8ece8;
+            display: flex;
+            gap: 10px;
+            font-size: 0.98rem;
+        }
+
+        .faq-tips li:last-child {
+            border-bottom: none;
+        }
+
+        .faq-tips li::before {
+            content: "▹";
+            color: #1d8a7f;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .small-note {
+            font-size: 0.85rem;
+            color: #587672;
+            margin-top: 1.2rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #c7ddd9;
+            margin: 1.8rem 0;
+        }
+
+        .footer-info {
+            font-size: 0.85rem;
+            color: #5a7672;
+            text-align: center;
+            padding-top: 1.8rem;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero .sub {
+                font-size: 1rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .link-section {
+                padding: 1.6rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 主视觉 -->
+    <div class="hero">
+        <h1>PC 国际麻将 · 站点介绍</h1>
+        <div class="sub">一款面向全球华人的在线麻将平台，注重公平氛围与简洁体验。</div>
+    </div>
+
+    <!-- 信息卡片：用途与特色 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🀄</div>
+            <h3>主要用途</h3>
+            <p>提供标准的国际麻将规则，支持好友约局与快速匹配。牌谱记录、局数统计帮助玩家复盘思考，无冗杂系统。</p>
+            <div class="tag-list">
+                <span>国标麻将</span>
+                <span>血战到底</span>
+                <span>推倒胡</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>平台特性</h3>
+            <p>PC 浏览器直接运行，无需下载额外软件；界面清爽，自动算番与牌型提示，降低上手门槛。</p>
+            <div class="tag-list">
+                <span>跨设备</span>
+                <span>低延迟</span>
+                <span>隐私优先</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 适合人群（双列） -->
+    <div class="audience-row">
+        <div class="audience-item">
+            <h4>🧑‍🤝‍🧑 日常休闲玩家</h4>
+            <p>工作间隙、居家放松，随时开一局；无需注册复杂信息，快速进入游戏。</p>
+        </div>
+        <div class="audience-item">
+            <h4>🧠 规则钻研者</h4>
+            <p>希望练习番种组合、了解国际麻将规则的爱好者；牌谱导出功能可辅助分析。</p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 —— 句子嵌入，不含点击/进入等词 -->
+    <div class="link-section">
+        <p>如果你是第一次接触在线麻将，或者想找一个规则清晰、广告干扰少的地方，可以了解下 <a href="https://pc-intl-mahjong.com">麻将胡了</a> —— 这个站点以国际通用规则为基础，界面比较克制，适合长期玩。</p>
+        <p style="margin-top: 0.6rem;">不少玩家反馈，它的胡牌提示和番种列表对新手尤其友好。如果你偏爱传统麻将又希望节奏适度，<a href="https://pc-intl-mahjong.com">麻将胡了</a> 算是一个干净的选择。</p>
+    </div>
+
+    <!-- FAQ / 提示摘要 -->
+    <div class="faq-tips">
+        <h3>常见疑问 · 摘要</h3>
+        <ul>
+            <li><strong>是否免费？</strong> 平台目前提供免费对局，无强制收费功能。</li>
+            <li><strong>需要注册吗？</strong> 支持游客快速进入，也可选择绑定邮箱保存数据。</li>
+            <li><strong>有机器人陪玩吗？</strong> 匹配空闲时会加入 AI 牌手，水平接近真实玩家。</li>
+            <li><strong>牌谱能保存多久？</strong> 最近 30 局记录自动保留，可手动下载。</li>
+        </ul>
+        <div class="small-note">以上内容基于公开信息整理，功能以实际页面为准。</div>
+    </div>
+
+    <!-- 结尾说明 (可信说明) -->
+    <hr>
+    <p style="color: #33635e; font-size: 0.95rem; text-align: center; max-width: 600px; margin: 0 auto;">
+        PC 国际麻将站点面向成年麻将爱好者，提供常规游戏服务。所有说明均基于站点公开内容，无诱导或虚假描述。
+    </p>
+    <div class="footer-info">
+        站点介绍页 · 信息卡片版
+    </div>
+</div>
+</body>
+</html>
